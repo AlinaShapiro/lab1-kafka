@@ -114,7 +114,7 @@ Local URL: http://localhost:8501
 As a result, you should see the Real-Time Sentiment Analysis of Tweets displayed in a table (showing the 10 most recent tweets and their corresponding model predictions transmitted through Apache Kafka). Additionally, you will see statistics on the distribution of predicted tweet sentiments.
 ![alt text](assets/streamlit_ui.png)
 
-9. Shutting Down the Pipeline:
+## Shutting Down the Pipeline:
 * Ensure all Python scripts and applications are terminated.
 
 * Run the following command to stop and remove the Docker container along with their volumes:
