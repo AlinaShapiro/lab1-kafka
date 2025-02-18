@@ -81,17 +81,21 @@ python backend/raw_data_producer.py data/sentiment140/balanced_tweets_part1.csv 
 source .venv/bin/activate
 python backend/raw_data_producer.py data/sentiment140/balanced_tweets_part2.csv --bootstrap_servers localhost:9095 --topic raw_data
 ```
+Here, the 2 Producers are created, raw_data_producer.py script reads tweet data from CSV files (balanced_tweets_part1.csv and balanced_tweets_part2.csv) and sends it to the raw_data topic in Kafka.
+
 3rd terminal: 
 ```bash
 source .venv/bin/activate
 python backend/data_preprocessing_consumer.py 
 ```
+Here, the data_preprocessing_consumer is created which consumes raw tweet data from the raw_data topic, cleans the text (removes stopwords, URLs etc), and sends the cleaned data to the processed_data topic.
 
 4th terminal: 
 ```bash
 source .venv/bin/activate
 python backend/classifier_consumer.py
 ```
+The classifier_consumer consumes preprocessed data from the processed_data topic, classifies the sentiment using the Sentiment140_roBERTa_5E model, and sends the results to the ml_result topic.
 
 5th terminal
 Run the Streamlit app:
@@ -100,6 +104,8 @@ Run the Streamlit app:
 source .venv/bin/activate
 streamlit run app.py
 ```
+The Streamlit app consumes classified sentiment data from the ml_result topic and visualizes it in real-time table of the 10 most recent tweets and their predicted sentiment and a bar chart showing the distribution of predicted sentiments.
+
 If where is an OSError conserning uavailability of port (given that it is currently not in use) try to find other ports. 
 
 By Default one can now view your Streamlit app in your browser.
